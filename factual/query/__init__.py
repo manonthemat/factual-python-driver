@@ -4,3 +4,4 @@ from .table import Table
 from .submit import Submit
 from .facets import Facets
 from .flag import Flag
+from .multi import Multi

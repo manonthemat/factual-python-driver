@@ -125,6 +125,12 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertTrue(category['shopping'] > 1000)
         self.assertTrue(category['health & medicine > physicians'] > 1000)
 
+    def test_multi(self):
+        q1 = self.factual.table('places').filters({'postcode':'90067'})
+        q2 = self.factual.facets('places').filters({'postcode':'90067'}).select('category')
+        response = self.factual.multi({'query1':q1,'query2':q2})
+        self.assertTrue('query1' in response and 'query2' in response)
+
 #    def test_submit_without_id(self):
 #        values = {'name': 'factual', 'locality': 'los angeles', 'address': '1801 Ave of the Stars'}
 #        submit = self.factual.submit('global', values=values).user('python_driver_tester')
