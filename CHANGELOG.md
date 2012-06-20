@@ -1,4 +1,4 @@
-## Unreleased
+## 1.2.0
 
  * added changelog
  * added parameter dict support to raw_read
