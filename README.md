@@ -10,6 +10,7 @@ This API supports queries to Factual's Read, Schema, Crosswalk, and Resolve APIs
 *   [Crosswalk](http://developer.factual.com/display/docs/Places+API+-+Crosswalk): Get third-party IDs
 *   [Resolve](http://developer.factual.com/display/docs/Places+API+-+Resolve): Enrich your data and match it against Factual's
 *   [Facets](http://developer.factual.com/display/docs/Core+API+-+Facets): Get counts of data by facet
+*   [Monetize](http://developer.factual.com/display/docs/Places+API+-+Monetize): Access third-party offers
 
 Full documentation is available at http://developer.factual.com
 
@@ -377,6 +378,19 @@ The raw read feature allows you to perform arbitrary read queries against the Fa
 response = factual.raw_read('t/places/read', 'limit=15&filters=%7B%22name%22%3A%22Starbucks%22%7D')
 # parameters in a dict
 response = factual.raw_read('t/places/read', {'limit':15,'filters':{"name":"Starbucks"}})
+```
+
+# Monetize
+
+The driver fully supports Factual's Monetize feature, which enables you to find deals for places in Factual's Global Places database.  Use the Query object to specify filters on which to run the monetize request.
+
+## Simple Monetize Example
+
+The monetize feature can be used like a normal table read.  Just create the monetize query and add filters, search terms, or other constraints:
+
+```python
+monetize = factual.monetize()
+result = monetize.filters({'place_locality':'Los Angeles'}).data()
 ```
 
 # Full Documentation
