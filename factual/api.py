@@ -22,6 +22,7 @@ class Factual(object):
     def table(self, table):
         return Table(self.api, 't/' + table)
 
+    # TODO create a normal table "t/crosswalk" when the current endpoint is removed
     def crosswalk(self):
         return Crosswalk(self.api)
 

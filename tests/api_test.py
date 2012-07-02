@@ -63,6 +63,12 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertTrue(row['resolved'])
         self.assertEqual('1801 Avenue Of The Stars', row['address'])
 
+    def test_crosswalk(self):
+        q = self.factual.crosswalk()
+        result = q.factual_id('03c26917-5d66-4de9-96bc-b13066173c65').only('simplegeo').data()
+        self.assertEqual(1, len(result))
+        self.assertEqual('SG_3ueEyOH4YN3ob9ryHjV1ey', result[0]['namespace_id'])
+
     def test_schema(self):
         schema = self.places.schema()
         self.assertEqual(21, len(schema['fields']))

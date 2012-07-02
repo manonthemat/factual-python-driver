@@ -1,3 +1,7 @@
+## Unreleased
+
+ * added deprecation warnings for crosswalk
+
 ## 1.2.0
 
  * added changelog
