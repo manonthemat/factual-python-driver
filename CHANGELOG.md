@@ -1,3 +1,7 @@
+## 1.2.2
+
+ * upgrade requests and requests-oauth dependencies
+
 ## 1.2.1
 
  * added deprecation warnings for crosswalk
