@@ -119,7 +119,7 @@ class APIException(Exception):
         self.status_code = status_code
         self.response = response
         self.url = url
-        exception = {'http_status_code':status_code,'response':response, 'url':url}
+        exception = {'http_status_code':status_code,'response':response,'url':url,'driver_version':DRIVER_VERSION_TAG}
         Exception.__init__(self, exception)
 
     def get_status_code(self):
