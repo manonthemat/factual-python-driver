@@ -65,7 +65,7 @@ class FactualAPITestSuite(unittest.TestCase):
 
     def test_crosswalk(self):
         q = self.factual.crosswalk()
-        result = q.factual_id('03c26917-5d66-4de9-96bc-b13066173c65').only('simplegeo').data()
+        result = q.filters({'factual_id':'03c26917-5d66-4de9-96bc-b13066173c65','namespace':'simplegeo'}).data()
         self.assertEqual(1, len(result))
         self.assertEqual('SG_3ueEyOH4YN3ob9ryHjV1ey', result[0]['namespace_id'])
 

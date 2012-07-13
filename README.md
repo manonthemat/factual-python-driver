@@ -110,20 +110,17 @@ factual.table("restaurants-us").filters(
 
 ## Simple Crosswalk Example
 
-### Warning
-The old crosswalk endpoint ("places/crosswalk") has been deprecated.  Crosswalk is now accessible as a regular table.  This means calls to methods such as 'factual_id' and 'only' should be replaced by row filters.
-
 ```python
 # Get Crosswalk data using a Factual ID
 FACTUAL_ID = "110ace9f-80a7-47d3-9170-e9317624ebd9"
-query = factual.table('crosswalk').filters({'factual_id':FACTUAL_ID})
+query = factual.crosswalk().filters({'factual_id':FACTUAL_ID})
 query.data()
 ```
 
 ```python
 # Get Crosswalk data using a third party namespace and namespace_id
 SIMPLEGEO_ID = "SG_6XIEi3qehN44LH8m8i86v0"
-query = factual.table('crosswalk')
+query = factual.crosswalk()
 namespace_query = query.filters({'namespace':'simplegeo','namespace_id':SIMPLEGEO_ID})
 factual_id = namespace_query.data()[0]['factual_id']
 query.filters({'factual_id':factual_id}).data()

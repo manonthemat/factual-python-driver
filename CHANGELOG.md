@@ -1,3 +1,7 @@
+## Unreleased
+
+ * replaced deprecated crosswalk query with regular table read
+
 ## 1.2.2
 
  * upgrade requests and requests-oauth dependencies

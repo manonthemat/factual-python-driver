@@ -8,7 +8,7 @@ from urllib import urlencode
 import requests
 from oauth_hook import OAuthHook
 
-from query import Crosswalk, Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode
+from query import Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode
 
 API_V3_HOST = "http://api.v3.factual.com"
 DRIVER_VERSION_TAG = "factual-python-driver-1.2.2"
@@ -22,9 +22,8 @@ class Factual(object):
     def table(self, table):
         return Table(self.api, 't/' + table)
 
-    # TODO create a normal table "t/crosswalk" when the current endpoint is removed
     def crosswalk(self):
-        return Crosswalk(self.api)
+        return Table(self.api, 't/crosswalk')
 
     def resolve(self, values):
         return Resolve(self.api, {'values': values})
