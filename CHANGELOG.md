@@ -1,4 +1,4 @@
-## Unreleased
+## 1.2.3
 
  * replaced deprecated crosswalk query with regular table read
 
