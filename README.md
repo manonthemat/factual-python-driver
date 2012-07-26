@@ -154,7 +154,7 @@ query = factual.table("global")
 
 ```python
 # 2. Filter results in country US
-query = query.filters("country":"US")
+query = query.filters({"country":"US"})
 ```
 
 ```python
@@ -165,6 +165,9 @@ query = query.search("sushi, sashimi")
 ```python
 # 4. Filter by geolocation
 query = query.geo({"$circle":{"$center":[34.06021, -118.41828], "$meters":5000}})
+# Or
+from factual.utils import circle
+query = query.geo(circle(34.06021, -118.41828, 5000))
 ```
 
 ```python
@@ -195,7 +198,7 @@ query = query.offset("20")
   <tr>
     <td>filters</td>
     <td>Restrict the data returned to conform to specific conditions.</td>
-    <td><tt>query = query.filters("name":{"$bw":"starbucks"})</tt></td>
+    <td><tt>query = query.filters({"name":{"$bw":"starbucks"}})</tt></td>
   </tr>
   <tr>
     <td>include_count</td>
@@ -222,7 +225,7 @@ query = query.offset("20")
     <td>Full text search across entity</td>
     <td>
       Find "sushi":<br><tt>query = query.search("sushi")</tt><p>
-      Find "sushi" or "sashimi":<br><tt>query = query.search("sushi", "sashimi")</tt><p>
+      Find "sushi" or "sashimi":<br><tt>query = query.search("sushi, sashimi")</tt><p>
       Find "sushi" and "santa" and "monica":<br><tt>query.search("sushi santa monica")</tt>
     </td>
   </tr>
@@ -256,7 +259,7 @@ The driver supports various row filter logic. For example:
 
 ```python
 # Returns records from the Places dataset with names beginning with "starbucks"
-factual.table("places").filters("name":{"$bw":"starbucks"}).data()
+factual.table("places").filters({"name":{"$bw":"starbucks"}}).data()
 ```
 
 ### Supported row filter logic
@@ -270,12 +273,12 @@ factual.table("places").filters("name":{"$bw":"starbucks"}).data()
   <tr>
     <td>$eq</td>
     <td>equal to</td>
-    <td><tt>query = query.filters("region":{"$eq":"CA"})</tt></td>
+    <td><tt>query = query.filters({"region":{"$eq":"CA"}})</tt></td>
   </tr>
   <tr>
     <td>$neq</td>
     <td>not equal to</td>
-    <td><tt>query = query.filters("region":{"$neq":"CA"})</tt></td>
+    <td><tt>query = query.filters({"region":{"$neq":"CA"}})</tt></td>
   </tr>
   <tr>
     <td>search</td>
@@ -285,58 +288,58 @@ factual.table("places").filters("name":{"$bw":"starbucks"}).data()
   <tr>
     <td>$in</td>
     <td>equals any of</td>
-    <td><tt>query = query.filters("region":{"$in":["CA", "NM", "NY"]})</tt></td>
+    <td><tt>query = query.filters({"region":{"$in":["CA", "NM", "NY"]}})</tt></td>
   </tr>
   <tr>
     <td>$nin</td>
     <td>does not equal any of</td>
-    <td><tt>query = query.filters("region":{"$nin":["CA", "NM", "NY"]})</tt></td>
+    <td><tt>query = query.filters({"region":{"$nin":["CA", "NM", "NY"]}})</tt></td>
   </tr>
   <tr>
     <td>$bw</td>
     <td>begins with</td>
-    <td><tt>query = query.filters("name":{"$bw":"starbucks"})</tt></td>
+    <td><tt>query = query.filters({"name":{"$bw":"starbucks"}})</tt></td>
   </tr>
   <tr>
     <td>$nbw</td>
     <td>does not begin with</td>
-    <td><tt>query = query.filters("name":{"$nbw":"starbucks"})</tt></td>
+    <td><tt>query = query.filters({"name":{"$nbw":"starbucks"}})</tt></td>
   </tr>
   <tr>
     <td>$bwin</td>
     <td>begins with any of</td>
-    <td><tt>query = query.filters("name":{"$bwin":["starbucks", "coffee", "tea"]})</tt></td>
+    <td><tt>query = query.filters({"name":{"$bwin":["starbucks", "coffee", "tea"]}})</tt></td>
   </tr>
   <tr>
     <td>$nbwin</td>
     <td>does not begin with any of</td>
-    <td><tt>query = query.filters("name":{"$nbwin":["starbucks", "coffee", "tea"]})</tt></td>
+    <td><tt>query = query.filters({"name":{"$nbwin":["starbucks", "coffee", "tea"]}})</tt></td>
   </tr>
   <tr>
     <td>$blank</td>
     <td>test to see if a value is (or is not) blank or null</td>
-    <td><tt>query = query.filters("tel":{"$blank":true})</tt><br>
-        <tt>query = query.filters("website":{"$blank":false})</tt></td>
+    <td><tt>query = query.filters({"tel":{"$blank":true}})</tt><br>
+        <tt>query = query.filters({"website":{"$blank":false}})</tt></td>
   </tr>
   <tr>
     <td>$gt</td>
     <td>greater than</td>
-    <td><tt>query = query.filters("rating":{"$gt":7.5})</tt></td>
+    <td><tt>query = query.filters({"rating":{"$gt":7.5}})</tt></td>
   </tr>
   <tr>
     <td>$gte</td>
     <td>greater than or equal</td>
-    <td><tt>query = query.filters("rating":{"$gte":7.5})</tt></td>
+    <td><tt>query = query.filters({"rating":{"$gte":7.5}})</tt></td>
   </tr>
   <tr>
     <td>$lt</td>
     <td>less than</td>
-    <td><tt>query = query.filters("rating":{"$lt":7.5})</tt></td>
+    <td><tt>query = query.filters({"rating":{"$lt":7.5}})</tt></td>
   </tr>
   <tr>
     <td>$lte</td>
     <td>less than or equal</td>
-    <td><tt>query = query.filters("rating":{"$lte":7.5})</tt></td>
+    <td><tt>query = query.filters({"rating":{"$lte":7.5}})</tt></td>
   </tr>
 </table>
 
@@ -346,7 +349,7 @@ Filters can be logically AND'd together. For example:
 
 ```python
 # name begins with "coffee" AND tel is not blank
-query = query.filters({ "$and":[{"name":{"$bw":"coffee"}}, {"tel":{"$blank":false}}] })
+query = query.filters({"$and":[{"name":{"$bw":"coffee"}}, {"tel":{"$blank":false}}] })
 ```
 
 ### OR
@@ -355,7 +358,7 @@ Filters can be logically OR'd. For example:
 
 ```python
 # name begins with "coffee" OR tel is not blank
-query = query.filters({ "$or":[{"name":{"$bw":"coffee"}}, {"tel":{"$blank":false}}] })
+query = query.filters({"$or":[{"name":{"$bw":"coffee"}}, {"tel":{"$blank":false}}] })
 ```
 
 ### Combined ANDs and ORs
@@ -366,7 +369,7 @@ You can nest AND and OR logic to whatever level of complexity you need. For exam
 # (name begins with "Starbucks") OR (name begins with "Coffee")
 # OR
 # (name full text search matches on "tea" AND tel is not blank)
-query = query.filters({ "$or":[ {"$or":[ {"name":{"$bw":"starbucks"}},
+query = query.filters({"$or":[ {"$or":[ {"name":{"$bw":"starbucks"}},
                                                {"name":{"$bw":"coffee"}}]},
                                    {"$and":[ {"name":{"$search":"tea"}},
                                                 {"tel":{"$blank":false}} ]} ]})
