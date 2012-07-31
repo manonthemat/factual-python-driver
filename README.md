@@ -109,6 +109,7 @@ factual.table("restaurants-us").filters(
 ```
 
 ## Simple Crosswalk Example
+Crosswalk is just a table like places or restaurants, so all of the normal table read features can be used with it.
 
 ```python
 # Get Crosswalk data using a Factual ID
