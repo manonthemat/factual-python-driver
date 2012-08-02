@@ -1,4 +1,5 @@
 from .resolve import Resolve
+from .match import Match
 from .table import Table
 from .submit import Submit
 from .facets import Facets

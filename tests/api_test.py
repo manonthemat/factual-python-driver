@@ -180,5 +180,10 @@ class FactualAPITestSuite(unittest.TestCase):
         streamed = list(diff_request.stream())
         self.assertItemsEqual(batch, streamed)
 
+    def test_match(self):
+        match = self.factual.match({'name':'McDonalds','address':'10451 Santa Monica Blvd','locality':'Los Angeles','region':'CA'})
+        match_id = match.get_id()
+        self.assertEqual('bd886f67-9d86-40c5-9217-f7bcd53cfc0e', match_id)
+
 if __name__ == '__main__':
     unittest.main()

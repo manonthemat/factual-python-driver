@@ -8,7 +8,7 @@ from urllib import urlencode
 import requests
 from oauth_hook import OAuthHook
 
-from query import Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode, Diffs
+from query import Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode, Diffs, Match
 
 API_V3_HOST = "http://api.v3.factual.com"
 DRIVER_VERSION_TAG = "factual-python-driver-1.2.3"
@@ -27,6 +27,9 @@ class Factual(object):
 
     def resolve(self, values):
         return Resolve(self.api, {'values': values})
+
+    def match(self, values):
+        return Match(self.api, {'values': values})
 
     def raw_read(self, path, raw_params):
         return self.api.raw_read(path, raw_params)

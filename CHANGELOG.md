@@ -2,6 +2,7 @@
 
  * added driver version to APIException
  * added diff support
+ * added match support
 
 ## 1.2.3
 

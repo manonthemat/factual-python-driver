@@ -8,7 +8,8 @@ This API supports queries to Factual's Read, Schema, Crosswalk, and Resolve APIs
 *   [Read](http://developer.factual.com/display/docs/Factual+Developer+APIs+Version+3): Search the data
 *   [Schema](http://developer.factual.com/display/docs/Core+API+-+Schema): Get table metadata
 *   [Crosswalk](http://developer.factual.com/display/docs/Places+API+-+Crosswalk): Get third-party IDs
-*   [Resolve](http://developer.factual.com/display/docs/Places+API+-+Resolve): Enrich your data and match it against Factual's
+*   [Resolve](http://developer.factual.com/display/docs/Places+API+-+Resolve): Enrich your data with Factual places
+*   [Match](http://developer.factual.com/display/docs/Places+API+-+Match): Map your data to Factual places
 *   [Facets](http://developer.factual.com/display/docs/Core+API+-+Facets): Get counts of data by facet
 *   [Monetize](http://developer.factual.com/display/docs/Places+API+-+Monetize): Access third-party offers
 *   [Geopulse](http://developer.factual.com/display/docs/Places+API+-+Geopulse): Geographic context
