@@ -153,22 +153,22 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertGreaterEqual(len(result), 1)
         self.assertTrue(all(row['place_locality'] == 'Los Angeles' for row in result))
 
-#    def test_submit_without_id(self):
-#        values = {'name': 'factual', 'locality': 'los angeles', 'address': '1801 Ave of the Stars'}
-#        submit = self.factual.submit('global', values=values).user('python_driver_tester')
-#        response = submit.write()
-#        self.assertFalse(response['new_entity'])
-#
-#    def test_submit_with_id(self):
-#        values = {'name': 'Factual'}
-#        submit = self.factual.submit('global', factual_id='03c26917-5d66-4de9-96bc-b13066173c65', values=values).user('python_driver_tester')
-#        response = submit.write()
-#        self.assertFalse(response['new_entity'])
-#
-#    def test_flag(self):
-#        flag = self.factual.flag('global', '03c26917-5d66-4de9-96bc-b13066173c65').user('python_driver_tester').other().debug(True)
-#        response = flag.write()
-#        self.assertEqual('ok', response['status'])
+    def test_submit_without_id(self):
+        values = {'longitude': 100}
+        submit = self.factual.submit('2EH4Pz', values=values).user('python_driver_tester')
+        response = submit.write()
+        self.assertTrue(response['new_entity'])
+
+    def test_submit_with_id(self):
+        values = {'longitude': 100}
+        submit = self.factual.submit('2EH4Pz', factual_id='0545b03f-9413-44ed-8882-3a9a461848da', values=values).user('python_driver_tester')
+        response = submit.write()
+        self.assertFalse(response['new_entity'])
+
+    def test_flag(self):
+        flag = self.factual.flag('2EH4Pz', '0545b03f-9413-44ed-8882-3a9a461848da').user('python_driver_tester').other().debug(True)
+        response = flag.write()
+        self.assertEqual('ok', response['status'])
 
 if __name__ == '__main__':
     unittest.main()
