@@ -11,13 +11,16 @@ This API supports queries to Factual's Read, Schema, Crosswalk, and Resolve APIs
 *   [Resolve](http://developer.factual.com/display/docs/Places+API+-+Resolve): Enrich your data and match it against Factual's
 *   [Facets](http://developer.factual.com/display/docs/Core+API+-+Facets): Get counts of data by facet
 *   [Monetize](http://developer.factual.com/display/docs/Places+API+-+Monetize): Access third-party offers
+*   [Geopulse](http://developer.factual.com/display/docs/Places+API+-+Geopulse): Geographic context
+*   [Geocode](http://developer.factual.com/display/docs/Places+API+-+Reverse+Geocoder): Translate coordinates into addresses
+*   [World Geographies](http://developer.factual.com/display/docs/World+Geographies): Administrative and natural geographies
+*   [Submit](https://github.com/Factual/factual-python-driver/wiki/Submit): Submit edits to Factual's data
+*   [Flag](https://github.com/Factual/factual-python-driver/wiki/Flag): Flag rows as problematic
+*   [Diffs](https://github.com/Factual/factual-python-driver/wiki/Diffs): Get the latest data updates
 
 Full documentation is available at http://developer.factual.com
 
 If you need additional support, please visit http://support.factual.com
-
-### Warning
-The driver also contains support for Submit and Flag requests which are not yet available through the Factual public API.  These API features will be enabled in the near future.
 
 # Overview
 
