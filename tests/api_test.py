@@ -176,9 +176,9 @@ class FactualAPITestSuite(unittest.TestCase):
 
     def test_diffs_streaming(self):
         diff_request = self.factual.diffs('2EH4Pz', 1339123455775, 1339136968687)
-        normal = diff_request.data()
-        streamed = list(diff_request.stream_json())
-        self.assertItemsEqual(normal, streamed)
+        batch = diff_request.data()
+        streamed = list(diff_request.stream())
+        self.assertItemsEqual(batch, streamed)
 
 if __name__ == '__main__':
     unittest.main()

@@ -17,9 +17,9 @@ class Diffs(Base):
             self.cached_response = [json.loads(line) for line in raw_response.splitlines()]
         return self.cached_response
 
-    def stream(self):
+    def stream_raw(self):
         return self.api.raw_stream_read(self.path, self.params)
 
-    def stream_json(self):
-        for line in self.stream():
+    def stream(self):
+        for line in self.stream_raw():
             yield json.loads(line)
