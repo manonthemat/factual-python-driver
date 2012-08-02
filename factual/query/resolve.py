@@ -7,8 +7,5 @@ class Resolve(Read):
     def values(self, values):
         return self._copy({'values': values})
 
-    def include_count(self, include):
-        return self._copy({'include_count': include})
-
     def _copy(self, params):
         return Resolve(self.api, self.merge_params(params))
