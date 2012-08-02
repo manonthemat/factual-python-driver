@@ -1,6 +1,7 @@
 ## Unreleased
 
  * added driver version to APIException
+ * added diff support
 
 ## 1.2.3
 

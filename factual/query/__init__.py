@@ -5,3 +5,4 @@ from .facets import Facets
 from .flag import Flag
 from .geopulse import Geopulse
 from .geocode import Geocode
+from .diffs import Diffs

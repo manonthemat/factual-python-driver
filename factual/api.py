@@ -8,7 +8,7 @@ from urllib import urlencode
 import requests
 from oauth_hook import OAuthHook
 
-from query import Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode
+from query import Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode, Diffs
 
 API_V3_HOST = "http://api.v3.factual.com"
 DRIVER_VERSION_TAG = "factual-python-driver-1.2.3"
@@ -49,6 +49,9 @@ class Factual(object):
     def monetize(self):
         return Table(self.api, 'places/monetize')
 
+    def diffs(self, table, start, end):
+        return Diffs(self.api, 't/' + table + '/diffs', start, end)
+
     def _generate_token(self, key, secret):
         access_token = OAuthHook(consumer_key=key, consumer_secret=secret, header_auth=True)
         return access_token
@@ -71,15 +74,21 @@ class API(object):
         return response['view']
 
     def raw_read(self, path, raw_params):
-        url = self._build_base_url(path)
-        if isinstance(raw_params, str):
-            url += raw_params
-        else:
-            url += self._make_query_string(raw_params)
+        url = self.build_url(path, raw_params)
         return self._make_request(url).text
 
+    def raw_stream_read(self, path, raw_params):
+        url = self.build_url(path, raw_params)
+        for line in self._make_request(url).iter_lines():
+            if line:
+                yield line
+
     def build_url(self, path, params):
-        url = self._build_base_url(path) + self._make_query_string(params)
+        url = self._build_base_url(path)
+        if isinstance(params, str):
+            url += params
+        else:
+            url += self._make_query_string(params)
         return url
 
     def _build_base_url(self, path):

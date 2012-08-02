@@ -170,5 +170,15 @@ class FactualAPITestSuite(unittest.TestCase):
         response = flag.write()
         self.assertEqual('ok', response['status'])
 
+    def test_diffs(self):
+        diffs = self.factual.diffs('2EH4Pz', 1339123455775, 1339136968687).data()
+        self.assertGreater(len(diffs), 0)
+
+    def test_diffs_streaming(self):
+        diff_request = self.factual.diffs('2EH4Pz', 1339123455775, 1339136968687)
+        normal = diff_request.data()
+        streamed = list(diff_request.stream_json())
+        self.assertItemsEqual(normal, streamed)
+
 if __name__ == '__main__':
     unittest.main()
