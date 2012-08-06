@@ -101,7 +101,7 @@ class API(object):
         url = self.build_url(path, params)
         response = self._make_request(url, self.client.get)
         payload = json.loads(response.text)
-        if payload['status'] != 'ok':
+        if payload['status'] == 'error':
             raise APIException(response.status_code, payload, url)
         return payload['response'] if 'response' in payload else payload
 

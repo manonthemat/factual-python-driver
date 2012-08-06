@@ -157,12 +157,14 @@ class FactualAPITestSuite(unittest.TestCase):
         values = {'longitude': 100}
         submit = self.factual.submit('2EH4Pz', values=values).user('python_driver_tester')
         response = submit.write()
+        self.assertIn('new_entity', response)
         self.assertTrue(response['new_entity'])
 
     def test_submit_with_id(self):
         values = {'longitude': 100}
         submit = self.factual.submit('2EH4Pz', factual_id='0545b03f-9413-44ed-8882-3a9a461848da', values=values).user('python_driver_tester')
         response = submit.write()
+        self.assertIn('new_entity', response)
         self.assertFalse(response['new_entity'])
 
     def test_flag(self):
