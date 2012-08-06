@@ -65,24 +65,24 @@ class API(object):
         self.client = requests.session(hooks={'pre_request': access_token})
 
     def get(self, query):
-        response = self._handle_request(query.path, query.params)
+        response = self._handle_request(query.path, query.params, self.client.get)
         return response
 
     def post(self, query):
-        response = self._make_post_request(query.path, query.params)
+        response = self._handle_request(query.path, query.params, self.client.post)
         return response
         
     def schema(self, query):
-        response = self._handle_request(query.path + '/schema', query.params)
+        response = self._handle_request(query.path + '/schema', query.params, self.client.get)
         return response['view']
 
     def raw_read(self, path, raw_params):
         url = self.build_url(path, raw_params)
-        return self._make_request(url).text
+        return self._make_request(url, self.client.get).text
 
     def raw_stream_read(self, path, raw_params):
         url = self.build_url(path, raw_params)
-        for line in self._make_request(url).iter_lines():
+        for line in self._make_request(url, self.client.get).iter_lines():
             if line:
                 yield line
 
@@ -97,27 +97,20 @@ class API(object):
     def _build_base_url(self, path):
         return API_V3_HOST + '/' + path + '?'
 
-    def _handle_request(self, path, params):
+    def _handle_request(self, path, params, request_method):
         url = self.build_url(path, params)
-        response = self._make_request(url)
-        payload = json.loads(response.text)
-        if payload['status'] != 'ok':
-            raise APIException(response.status_code, payload, url)
-        return payload['response']
-
-    def _make_request(self, url):
-        headers = {'X-Factual-Lib': DRIVER_VERSION_TAG}
-        response = self.client.get(url, headers=headers)
-        return response
-
-    def _make_post_request(self, path, params):
-        url = self.build_url(path, params)
-        headers = {'X-Factual-Lib': DRIVER_VERSION_TAG}
-        response = self.client.post(url, headers=headers)
+        response = self._make_request(url, self.client.get)
         payload = json.loads(response.text)
         if payload['status'] != 'ok':
             raise APIException(response.status_code, payload, url)
         return payload['response'] if 'response' in payload else payload
+
+    def _make_request(self, url, request_method):
+        headers = {'X-Factual-Lib': DRIVER_VERSION_TAG}
+        response = request_method(url, headers=headers)
+        if not 200 <= response.status_code < 300:
+            raise APIException(response.status_code, response.text, url)
+        return response
 
     def _make_query_string(self, params):
         string_params = []
