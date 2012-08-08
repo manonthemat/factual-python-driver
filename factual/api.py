@@ -8,7 +8,7 @@ from urllib import urlencode
 import requests
 from rauth.hook import OAuth1Hook
 
-from query import Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode, Diffs, Match
+from query import Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode, Diffs, Match, Multi
 
 API_V3_HOST = "http://api.v3.factual.com"
 DRIVER_VERSION_TAG = "factual-python-driver-1.2.3"
@@ -55,6 +55,9 @@ class Factual(object):
     def diffs(self, table, start, end):
         return Diffs(self.api, 't/' + table + '/diffs', start, end)
 
+    def multi(self, queries):
+        return Multi(self.api, queries).make_request()
+
     def _generate_token(self, key, secret):
         access_token = OAuth1Hook(consumer_key=key, consumer_secret=secret, header_auth=True)
         return access_token
@@ -91,6 +94,9 @@ class API(object):
         url += '?' + urlencode([(k,v) for k,v in self._transform_params(params).items()])
         return url
 
+    def build_multi_url(self, query):
+        return '/' + query.path + '?' + self._make_query_string(query.params)
+
     def _build_base_url(self, path):
         return API_V3_HOST + '/' + path
 
@@ -118,6 +124,7 @@ class API(object):
             transformed = json.dumps(val) if not isinstance(val, str) else val
             string_params.append((key, transformed))
         return dict(string_params)
+
 
 class APIException(Exception):
     def __init__(self, status_code, response, url):

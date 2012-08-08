@@ -187,5 +187,11 @@ class FactualAPITestSuite(unittest.TestCase):
         match_id = match.get_id()
         self.assertEqual('bd886f67-9d86-40c5-9217-f7bcd53cfc0e', match_id)
 
+    def test_multi(self):
+        q1 = self.factual.table('places').filters({'postcode':'90067'})
+        q2 = self.factual.facets('places').filters({'postcode':'90067'}).select('category')
+        response = self.factual.multi({'query1':q1,'query2':q2})
+        self.assertTrue('query1' in response and 'query2' in response)
+
 if __name__ == '__main__':
     unittest.main()
