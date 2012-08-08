@@ -131,15 +131,6 @@ factual_id = namespace_query.data()[0]['factual_id']
 query.filters({'factual_id':factual_id}).data()
 ```
 
-## Simple Resolve Example
-
-```python
-# Returns resolved entities
-query = factual.resolve({"name":"McDonalds","address":"10451 Santa Monica Blvd","region":"CA","postcode":"90025"})
-query.data()
-query.data()[1]["resolved"]  # true or false
-```
-
 ## Simple Facets Example
 
 ```python
