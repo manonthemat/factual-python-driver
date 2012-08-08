@@ -91,7 +91,7 @@ class API(object):
 
     def build_url(self, path, params):
         url = self._build_base_url(path)
-        url += '?' + urlencode([(k,v) for k,v in self._transform_params(params).items()])
+        url += '?' + self._make_query_string(query.params)
         return url
 
     def build_multi_url(self, query):
@@ -115,6 +115,9 @@ class API(object):
         if not 200 <= response.status_code < 300:
             raise APIException(response.status_code, response.text, response.url)
         return response
+
+    def _make_query_string(self, params):
+        return urlencode([(k,v) for k,v in self._transform_params(params).items()])
 
     def _transform_params(self, params):
         if isinstance(params, str):

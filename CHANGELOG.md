@@ -4,6 +4,7 @@
  * added diff support
  * added match support
  * replaced requests-oauth dependency with rauth
+ * added multi call support
 
 ## 1.2.3
 
