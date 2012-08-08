@@ -45,9 +45,9 @@ factual = Factual(KEY, SECRET)
 example.py is provided with the driver as a reference.
 
 ## Dependencies
-[Requests](http://docs.python-requests.org/en/v0.10.7/index.html)
+[requests](http://github.com/kennethreitz/requests)
 
-[requests-oauth](https://github.com/maraujop/requests-oauth)
+[rauth](http://github.com/litl/rauth)
 
 
 ## Basic Design

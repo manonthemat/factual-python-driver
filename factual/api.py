@@ -91,7 +91,7 @@ class API(object):
 
     def build_url(self, path, params):
         url = self._build_base_url(path)
-        url += '?' + self._make_query_string(query.params)
+        url += '?' + self._make_query_string(params)
         return url
 
     def build_multi_url(self, query):
