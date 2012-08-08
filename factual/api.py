@@ -6,7 +6,7 @@ import json
 from urllib import urlencode
 
 import requests
-from oauth_hook import OAuthHook
+from rauth.hook import OAuth1Hook
 
 from query import Resolve, Table, Submit, Facets, Flag, Geopulse, Geocode, Diffs, Match
 
@@ -56,7 +56,7 @@ class Factual(object):
         return Diffs(self.api, 't/' + table + '/diffs', start, end)
 
     def _generate_token(self, key, secret):
-        access_token = OAuthHook(consumer_key=key, consumer_secret=secret, header_auth=True)
+        access_token = OAuth1Hook(consumer_key=key, consumer_secret=secret, header_auth=True)
         return access_token
 
 
@@ -77,47 +77,47 @@ class API(object):
         return response['view']
 
     def raw_read(self, path, raw_params):
-        url = self.build_url(path, raw_params)
-        return self._make_request(url, self.client.get).text
+        url = self._build_base_url(path)
+        return self._make_request(url, raw_params, self.client.get).text
 
     def raw_stream_read(self, path, raw_params):
-        url = self.build_url(path, raw_params)
-        for line in self._make_request(url, self.client.get).iter_lines():
+        url = self._build_base_url(path, raw_params)
+        for line in self._make_request(url, raw_params, self.client.get).iter_lines():
             if line:
                 yield line
 
     def build_url(self, path, params):
         url = self._build_base_url(path)
-        if isinstance(params, str):
-            url += params
-        else:
-            url += self._make_query_string(params)
+        url += '?' + urlencode([(k,v) for k,v in self._transform_params(params).items()])
         return url
 
     def _build_base_url(self, path):
-        return API_V3_HOST + '/' + path + '?'
+        return API_V3_HOST + '/' + path
 
     def _handle_request(self, path, params, request_method):
-        url = self.build_url(path, params)
-        response = self._make_request(url, self.client.get)
+        url = self._build_base_url(path)
+        response = self._make_request(url, params, request_method)
         payload = json.loads(response.text)
         if payload['status'] == 'error':
-            raise APIException(response.status_code, payload, url)
+            raise APIException(response.status_code, payload, response.url)
         return payload['response'] if 'response' in payload else payload
 
-    def _make_request(self, url, request_method):
+    def _make_request(self, url, params, request_method):
         headers = {'X-Factual-Lib': DRIVER_VERSION_TAG}
-        response = request_method(url, headers=headers)
+        request_params = self._transform_params(params)
+        response = request_method(url, headers=headers, params=request_params)
         if not 200 <= response.status_code < 300:
-            raise APIException(response.status_code, response.text, url)
+            raise APIException(response.status_code, response.text, response.url)
         return response
 
-    def _make_query_string(self, params):
+    def _transform_params(self, params):
+        if isinstance(params, str):
+            return params
         string_params = []
         for key, val in params.items():
             transformed = json.dumps(val) if not isinstance(val, str) else val
             string_params.append((key, transformed))
-        return urlencode(string_params)
+        return dict(string_params)
 
 class APIException(Exception):
     def __init__(self, status_code, response, url):

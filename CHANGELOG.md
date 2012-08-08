@@ -3,6 +3,7 @@
  * added driver version to APIException
  * added diff support
  * added match support
+ * replaced requests-oauth dependency with rauth
 
 ## 1.2.3
 
