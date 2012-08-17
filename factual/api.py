@@ -65,7 +65,7 @@ class Factual(object):
 
 class API(object):
     def __init__(self, access_token):
-        self.client = requests.session(hooks={'pre_request': access_token})
+        self.client = requests.session(hooks={'pre_request': access_token}, prefetch=False)
 
     def get(self, query):
         response = self._handle_request(query.path, query.params, self.client.get)
@@ -84,7 +84,7 @@ class API(object):
         return self._make_request(url, raw_params, self.client.get).text
 
     def raw_stream_read(self, path, raw_params):
-        url = self._build_base_url(path, raw_params)
+        url = self._build_base_url(path)
         for line in self._make_request(url, raw_params, self.client.get).iter_lines():
             if line:
                 yield line
