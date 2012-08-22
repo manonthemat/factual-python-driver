@@ -2,6 +2,7 @@ from .resolve import Resolve
 from .match import Match
 from .table import Table
 from .submit import Submit
+from .insert import Insert
 from .facets import Facets
 from .flag import Flag
 from .geopulse import Geopulse
