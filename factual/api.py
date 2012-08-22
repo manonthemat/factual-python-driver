@@ -71,24 +71,24 @@ class API(object):
         self.client = requests.session(hooks={'pre_request': access_token}, prefetch=False)
 
     def get(self, query):
-        response = self._handle_request(query.path, query.params, self.client.get)
+        response = self._handle_request(query.path, query.params, self._make_get_request)
         return response
 
     def post(self, query):
-        response = self._handle_request(query.path, query.params, self.client.post)
+        response = self._handle_request(query.path, query.params, self._make_post_request)
         return response
         
     def schema(self, query):
-        response = self._handle_request(query.path + '/schema', query.params, self.client.get)
+        response = self._handle_request(query.path + '/schema', query.params, self._make_get_request)
         return response['view']
 
     def raw_read(self, path, raw_params):
         url = self._build_base_url(path)
-        return self._make_request(url, raw_params, self.client.get).text
+        return self._make_request(url, raw_params, self._make_get_request).text
 
     def raw_stream_read(self, path, raw_params):
         url = self._build_base_url(path)
-        for line in self._make_request(url, raw_params, self.client.get).iter_lines():
+        for line in self._make_request(url, raw_params, self._make_get_request).iter_lines():
             if line:
                 yield line
 
@@ -112,12 +112,19 @@ class API(object):
         return payload['response'] if 'response' in payload else payload
 
     def _make_request(self, url, params, request_method):
-        headers = {'X-Factual-Lib': DRIVER_VERSION_TAG}
         request_params = self._transform_params(params)
-        response = request_method(url, headers=headers, params=request_params)
+        response = request_method(url, request_params)
         if not 200 <= response.status_code < 300:
             raise APIException(response.status_code, response.text, response.url)
         return response
+
+    def _make_get_request(self, url, params):
+        headers = {'X-Factual-Lib': DRIVER_VERSION_TAG}
+        return self.client.get(url, headers=headers, params=params)
+
+    def _make_post_request(self, url, params):
+        headers = {'X-Factual-Lib': DRIVER_VERSION_TAG, 'content-type': 'application/x-www-form-urlencoded'}
+        return self.client.post(url, headers=headers, data=params)
 
     def _make_query_string(self, params):
         return urlencode([(k,v) for k,v in self._transform_params(params).items()])
