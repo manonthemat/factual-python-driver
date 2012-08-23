@@ -94,7 +94,7 @@ class FactualAPITestSuite(unittest.TestCase):
     def test_and(self):
         q = self.places.filters({"$and":[{"country":"US"},{"website":{"$blank":False}}]})
         row = q.data()[0]
-        self.assertEqual('US', row['country'])
+        self.assertEqual('US', row['country'].upper())
         self.assertRegexpMatches(row['website'], 'http')
 
     def test_raw_read(self):
