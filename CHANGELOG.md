@@ -1,3 +1,7 @@
+## Unreleased
+
+ * added raw write support
+
 ## 1.3.0
 
  * added driver version to APIException

@@ -112,6 +112,13 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertEqual(15, payload['response']['included_rows'])
         self.assertTrue(all(row['name'] == 'Starbucks' for row in data))
 
+    def test_raw_write(self):
+        uuid = 'f9ffc74e-c79b-4a28-8d8f-9d484100f148'
+        params = {'problem':'other','user':'python_driver_tester','debug':True}
+        response = self.factual.raw_write('t/t7RSEV/' + uuid + '/flag', params)
+        payload = json.loads(response)
+        self.assertEqual('ok', payload['status'])
+
     def test_facets1(self):
         q = self.facets.search("starbucks").select("country")
         results = q.data()['country']
@@ -174,7 +181,7 @@ class FactualAPITestSuite(unittest.TestCase):
             self.assertEqual('warning', response['status'])
 
     def test_flag(self):
-        flag = self.factual.flag('t7RSEV', 'bf6547a8-c0f3-4ada-abf8-9b831bbd5eeb').user('python_driver_tester').other().debug(True)
+        flag = self.factual.flag('t7RSEV', 'f9ffc74e-c79b-4a28-8d8f-9d484100f148').user('python_driver_tester').other().debug(True)
         response = flag.write()
         self.assertEqual('ok', response['status'])
 

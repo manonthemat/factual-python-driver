@@ -34,6 +34,9 @@ class Factual(object):
     def raw_read(self, path, raw_params):
         return self.api.raw_read(path, raw_params)
 
+    def raw_write(self, path, raw_params):
+        return self.api.raw_write(path, raw_params)
+
     def facets(self, table):
         return Facets(self.api, 't/' + table + '/facets')
 
@@ -91,6 +94,10 @@ class API(object):
         for line in self._make_request(url, raw_params, self._make_get_request).iter_lines():
             if line:
                 yield line
+
+    def raw_write(self, path, raw_params):
+        url = self._build_base_url(path)
+        return self._make_request(url, raw_params, self._make_post_request).text
 
     def build_url(self, path, params):
         url = self._build_base_url(path)
