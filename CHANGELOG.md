@@ -1,5 +1,6 @@
 ## Unreleased
 
+ * added insert support
  * added raw write support
 
 ## 1.3.0
