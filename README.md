@@ -315,7 +315,7 @@ factual.table("places").filters({"name":{"$bw":"starbucks"}}).data()
     <td>$blank</td>
     <td>test to see if a value is (or is not) blank or null</td>
     <td><tt>query = query.filters({"tel":{"$blank":true}})</tt><br>
-        <tt>query = query.filters({"website":{"$blank":false}})</tt></td>
+        <tt>query = query.filters({"website":{"$blank":False}})</tt></td>
   </tr>
   <tr>
     <td>$gt</td>
@@ -345,7 +345,7 @@ Filters can be logically AND'd together. For example:
 
 ```python
 # name begins with "coffee" AND tel is not blank
-query = query.filters({"$and":[{"name":{"$bw":"coffee"}}, {"tel":{"$blank":false}}] })
+query = query.filters({"$and":[{"name":{"$bw":"coffee"}}, {"tel":{"$blank":False}}] })
 ```
 
 ### OR
@@ -354,7 +354,7 @@ Filters can be logically OR'd. For example:
 
 ```python
 # name begins with "coffee" OR tel is not blank
-query = query.filters({"$or":[{"name":{"$bw":"coffee"}}, {"tel":{"$blank":false}}] })
+query = query.filters({"$or":[{"name":{"$bw":"coffee"}}, {"tel":{"$blank":False}}] })
 ```
 
 ### Combined ANDs and ORs
@@ -368,7 +368,7 @@ You can nest AND and OR logic to whatever level of complexity you need. For exam
 query = query.filters({"$or":[ {"$or":[ {"name":{"$bw":"starbucks"}},
                                                {"name":{"$bw":"coffee"}}]},
                                    {"$and":[ {"name":{"$search":"tea"}},
-                                                {"tel":{"$blank":false}} ]} ]})
+                                                {"tel":{"$blank":False}} ]} ]})
 ```
 
 ## Raw Read
