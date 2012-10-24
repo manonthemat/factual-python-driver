@@ -1,7 +1,8 @@
-## Unreleased
+## 1.3.1
 
  * added insert support
  * added raw write support
+ * added optional timeout
 
 ## 1.3.0
 
