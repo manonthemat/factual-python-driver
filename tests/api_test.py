@@ -113,9 +113,9 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertTrue(all(row['name'] == 'Starbucks' for row in data))
 
     def test_raw_write(self):
-        uuid = 'f9ffc74e-c79b-4a28-8d8f-9d484100f148'
+        uuid = '1007462b-dd79-44f5-a69f-e0b6041fa8bd'
         params = {'problem':'other','user':'python_driver_tester','debug':True}
-        response = self.factual.raw_write('t/t7RSEV/' + uuid + '/flag', params)
+        response = self.factual.raw_write('t/us-sandbox/' + uuid + '/flag', params)
         payload = json.loads(response)
         self.assertEqual('ok', payload['status'])
 
@@ -162,7 +162,7 @@ class FactualAPITestSuite(unittest.TestCase):
 
     def test_submit_without_id(self):
         values = {'longitude': 100}
-        submit = self.factual.submit('t7RSEV', values=values).user('python_driver_tester')
+        submit = self.factual.submit('us-sandbox', values=values).user('python_driver_tester')
         response = submit.write()
         if 'new_entity' in response:
             self.assertTrue(response['new_entity'])
@@ -172,7 +172,7 @@ class FactualAPITestSuite(unittest.TestCase):
 
     def test_submit_with_id(self):
         values = {'longitude': 100}
-        submit = self.factual.submit('t7RSEV', factual_id='bf6547a8-c0f3-4ada-abf8-9b831bbd5eeb', values=values).user('python_driver_tester')
+        submit = self.factual.submit('us-sandbox', factual_id='1007462b-dd79-44f5-a69f-e0b6041fa8bd', values=values).user('python_driver_tester')
         response = submit.write()
         if 'new_entity' in response:
             self.assertFalse(response['new_entity'])
@@ -181,7 +181,7 @@ class FactualAPITestSuite(unittest.TestCase):
             self.assertEqual('warning', response['status'])
 
     def test_flag(self):
-        flag = self.factual.flag('t7RSEV', 'f9ffc74e-c79b-4a28-8d8f-9d484100f148').user('python_driver_tester').other().debug(True)
+        flag = self.factual.flag('us-sandbox', '1007462b-dd79-44f5-a69f-e0b6041fa8bd').user('python_driver_tester').other().debug(True)
         response = flag.write()
         self.assertEqual('ok', response['status'])
 
