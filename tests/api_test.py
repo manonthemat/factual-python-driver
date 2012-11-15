@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import json
 import unittest
 
@@ -77,9 +79,9 @@ class FactualAPITestSuite(unittest.TestCase):
 
     # full text search for things where locality equals 大阪市 (Osaka: test unicode)
     def test_unicode(self):
-        q = self.places.filters({'locality': '大阪市'})
+        q = self.places.filters({'locality': u'大阪市'})
         for r in q.data():
-            self.assertEqual('大阪市', r['locality'])
+            self.assertEqual(u'大阪市', r['locality'])
 
     def test_bw_encoding(self):
         q = self.places.filters({'category': {"$bw":"Arts, Entertainment & Nightlife > Bars"}})
