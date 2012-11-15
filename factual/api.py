@@ -8,7 +8,7 @@ from urllib import urlencode
 import requests
 from rauth.hook import OAuth1Hook
 
-from query import Resolve, Table, Submit, Insert, Facets, Flag, Geopulse, Geocode, Diffs, Match, Multi
+from query import Resolve, Table, Submit, Insert, Facets, Flag, Geopulse, Geocode, Diffs, Match, Multi, Clear
 
 API_V3_HOST = "http://api.v3.factual.com"
 DRIVER_VERSION_TAG = "factual-python-driver-1.3.1"
@@ -47,6 +47,9 @@ class Factual(object):
 
     def insert(self, table, factual_id=None, values={}):
         return Insert(self.api, table, factual_id, {'values': values})
+
+    def clear(self, table, factual_id, fields):
+        return Clear(self.api, table, factual_id, {'fields': fields})
 
     def flag(self, table, factual_id):
         return Flag(self.api, table, factual_id)

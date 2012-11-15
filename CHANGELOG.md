@@ -1,3 +1,7 @@
+## unreleased
+
+ * added clear support
+
 ## 1.3.1
 
  * added insert support

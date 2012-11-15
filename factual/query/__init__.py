@@ -3,6 +3,7 @@ from .match import Match
 from .table import Table
 from .submit import Submit
 from .insert import Insert
+from .clear import Clear
 from .facets import Facets
 from .flag import Flag
 from .geopulse import Geopulse
