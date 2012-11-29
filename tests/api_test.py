@@ -185,11 +185,8 @@ class FactualAPITestSuite(unittest.TestCase):
     def test_clear(self):
         clear = self.factual.clear('us-sandbox', '1007462b-dd79-44f5-a69f-e0b6041fa8bd', 'latitude,longitude').user('python_driver_tester')
         response = clear.write()
-        if 'new_entity' in response:
-            self.assertFalse(response['new_entity'])
-        else:
-            self.assertIn('status', response)
-            self.assertEqual('warning', response['status'])
+        self.assertIn('commit_id', response)
+        self.assertGreater(len(response['commit_id']), 0)
 
     def test_flag(self):
         flag = self.factual.flag('us-sandbox', '1007462b-dd79-44f5-a69f-e0b6041fa8bd').user('python_driver_tester').other().debug(True)
