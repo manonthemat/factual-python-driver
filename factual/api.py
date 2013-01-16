@@ -11,7 +11,7 @@ from rauth.hook import OAuth1Hook
 from query import Resolve, Table, Submit, Insert, Facets, Flag, Geopulse, Geocode, Diffs, Match, Multi, Clear
 
 API_V3_HOST = "http://api.v3.factual.com"
-DRIVER_VERSION_TAG = "factual-python-driver-1.3.1"
+DRIVER_VERSION_TAG = "factual-python-driver-1.3.2"
 
 class Factual(object):
     def __init__(self, key, secret, timeout=None):

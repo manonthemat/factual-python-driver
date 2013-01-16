@@ -1,5 +1,6 @@
-## unreleased
+## 1.3.2
 
+ * fixed #5
  * added clear support
 
 ## 1.3.1
