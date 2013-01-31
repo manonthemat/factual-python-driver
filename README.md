@@ -47,7 +47,7 @@ example.py is provided with the driver as a reference.
 ## Dependencies
 [requests](http://github.com/kennethreitz/requests)
 
-[rauth](http://github.com/litl/rauth)
+[requests_oauthlib](https://github.com/requests/requests-oauthlib)
 
 
 ## Basic Design
