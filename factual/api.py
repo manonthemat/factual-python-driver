@@ -11,7 +11,7 @@ from requests_oauthlib import OAuth1
 from query import Resolve, Table, Submit, Insert, Facets, Flag, Geopulse, Geocode, Diffs, Match, Multi, Clear
 
 API_V3_HOST = "http://api.v3.factual.com"
-DRIVER_VERSION_TAG = "factual-python-driver-1.3.2"
+DRIVER_VERSION_TAG = "factual-python-driver-1.4.0"
 
 class Factual(object):
     def __init__(self, key, secret, timeout=None):

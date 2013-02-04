@@ -1,4 +1,6 @@
-## unreleased
+## 1.4.0
+ * upgraded requests
+ * replaced rauth with requests-oauthlib
  * added user parameter to reads
 
 ## 1.3.2
