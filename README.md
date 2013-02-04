@@ -244,8 +244,13 @@ query = query.offset("20")
         By default, any query with a full text search will be sorted by relevance.<p>
         Any query with a geo filter will be sorted by distance from the reference point.  If both a geo filter and full text search are present, the default will be relevance followed by distance.</td>
     <td><tt>query = query.sort("name:asc")</tt><br>
-    <tt>query = query.sort("$distance:asc")</tt>
+    <tt>query = query.sort("$distance:asc")</tt><br>
     <tt>query = query.sort("$distance:asc,name:desc")</tt></td>
+  </tr>
+  <tr>
+    <td>user</td>
+    <td>Accepts arbitrary tokens for discriminating requests across clients.</td>
+    <td><tt>query = query.user("my username")</tt></td>
   </tr>
 </table>
 
