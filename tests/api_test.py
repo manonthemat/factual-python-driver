@@ -59,6 +59,11 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertEqual('Factual', row['name'])
         self.assertEqual('1801 Avenue Of The Stars', row['address'])
 
+    def test_read_user(self):
+        q = self.places.search('sushi').user('python_driver_tester')
+        included_rows = q.included_rows()
+        self.assertEqual(20, included_rows)
+
     def test_resolve(self):
         q = self.factual.resolve({'name': 'factual inc', 'locality': 'los angeles'})
         row = q.data()[0]

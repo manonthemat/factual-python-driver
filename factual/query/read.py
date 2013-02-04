@@ -14,8 +14,13 @@ class Read(Base):
     def included_rows(self):
         return self.get_response()['included_rows']
 
+    def user(self, user):
+        return self._copy({'user': user})
 
     def get_response(self):
         if not self.response:
             self.response = self.api.get(self)
         return self.response
+
+    def _copy(self, params):
+        pass

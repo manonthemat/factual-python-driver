@@ -1,3 +1,6 @@
+## unreleased
+ * added user parameter to reads
+
 ## 1.3.2
 
  * fixed #5
