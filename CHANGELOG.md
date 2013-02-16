@@ -1,3 +1,6 @@
+## unreleased
+ * added ability to set table for match and resolve (#8)
+
 ## 1.4.0
  * upgraded requests
  * replaced rauth with requests-oauthlib

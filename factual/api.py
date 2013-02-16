@@ -20,18 +20,17 @@ class Factual(object):
         self.timeout = timeout
         self.api = API(self._generate_token(key, secret),timeout)
 
-
     def table(self, table):
         return Table(self.api, 't/' + table)
 
     def crosswalk(self):
         return Table(self.api, 't/crosswalk')
 
-    def resolve(self, values):
-        return Resolve(self.api, {'values': values})
+    def resolve(self, table, values):
+        return Resolve(self.api, table, {'values': values})
 
-    def match(self, values):
-        return Match(self.api, {'values': values})
+    def match(self, table, values):
+        return Match(self.api, table, {'values': values})
 
     def raw_read(self, path, raw_params):
         return self.api.raw_read(path, raw_params)

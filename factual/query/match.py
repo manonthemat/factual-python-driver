@@ -1,8 +1,8 @@
 from read import Read
 
 class Match(Read):
-    def __init__(self, api, values={}):
-        Read.__init__(self, api, 'places/match', values)
+    def __init__(self, api, table, values={}):
+        Read.__init__(self, api, 't/' + table + '/match', values)
 
     def values(self, values):
         return self._copy({'values': values})
