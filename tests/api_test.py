@@ -78,7 +78,7 @@ class FactualAPITestSuite(unittest.TestCase):
 
     def test_schema(self):
         schema = self.places.schema()
-        self.assertEqual(22, len(schema['fields']))
+        self.assertEqual(25, len(schema['fields']))
         self.assertIn('title', schema)
         self.assertIn('locality', set(f['name'] for f in schema['fields']))
 
