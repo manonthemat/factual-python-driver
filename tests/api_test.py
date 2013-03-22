@@ -78,7 +78,7 @@ class FactualAPITestSuite(unittest.TestCase):
 
     def test_schema(self):
         schema = self.places.schema()
-        self.assertEqual(25, len(schema['fields']))
+        self.assertGreater(len(schema['fields']),20)
         self.assertIn('title', schema)
         self.assertIn('locality', set(f['name'] for f in schema['fields']))
 
@@ -140,10 +140,10 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertTrue(region['tx'] > 200)
 
     def test_facets_geo(self):
-        q = self.facets.select("category").geo(circle(34.06018, -118.41835, 5000))
-        category = q.data()['category']
-        self.assertTrue(category['shopping'] > 1000)
-        self.assertTrue(category['health & medicine > physicians'] > 1000)
+        q = self.facets.select("locality").geo(circle(34.06018, -118.41835, 1000))
+        locality = q.data()['locality']
+        self.assertTrue(locality['los angeles'] > 3000)
+        self.assertTrue(locality['beverly hills'] > 500)
 
     def test_geopulse(self):
         geopulse = self.factual.geopulse(point(34.06021, -118.41828))
