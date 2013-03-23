@@ -3,6 +3,7 @@ Factual API driver
 """
 
 import json
+from functools import partial
 from urllib import urlencode
 
 import requests
@@ -97,7 +98,7 @@ class API(object):
 
     def raw_stream_read(self, path, raw_params):
         url = self._build_base_url(path)
-        for line in self._make_request(url, raw_params, self._make_get_request).iter_lines():
+        for line in self._make_request(url, raw_params, partial(self._make_get_request, stream=True)).iter_lines():
             if line:
                 yield line
 
@@ -131,9 +132,9 @@ class API(object):
             raise APIException(response.status_code, response.text, response.url)
         return response
 
-    def _make_get_request(self, url, params):
+    def _make_get_request(self, url, params, stream=False):
         headers = {'X-Factual-Lib': DRIVER_VERSION_TAG}
-        return self.client.get(url, headers=headers, params=params, timeout=self.client.timeout)
+        return self.client.get(url, headers=headers, params=params, timeout=self.client.timeout, stream=stream)
 
     def _make_post_request(self, url, params):
         headers = {'X-Factual-Lib': DRIVER_VERSION_TAG, 'content-type': 'application/x-www-form-urlencoded'}
