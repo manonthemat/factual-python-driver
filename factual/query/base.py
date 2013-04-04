@@ -5,7 +5,7 @@ Base query class
 class Base(object):
     def __init__(self, api, path, params):
         self.api = api
-        self.path = path
+        self._path = path
         self.params = params
 
     def get_url(self):
@@ -15,3 +15,7 @@ class Base(object):
         new_params = self.params.copy()
         new_params.update(params)
         return new_params
+
+    @property
+    def path(self):
+        return self._path

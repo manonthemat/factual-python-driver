@@ -69,6 +69,10 @@ class Factual(object):
     def multi(self, queries):
         return Multi(self.api, queries).make_request()
 
+    def get_row(self, table, factual_id):
+        data = self.table(table).factual_id(factual_id).data()
+        return data[0]
+
     def _generate_token(self, key, secret):
         access_token = OAuth1(key, secret)
         return access_token

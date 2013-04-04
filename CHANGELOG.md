@@ -1,5 +1,6 @@
 ## unreleased
  * added ability to set table for match and resolve (#8)
+ * added get_row to easily fetch a single row from a table
 
 ## 1.4.0
  * upgraded requests

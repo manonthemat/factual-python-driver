@@ -2,14 +2,19 @@
 Factual table api query
 """
 
+from base import Base
 from read import Read
 
 DEFAULT_LIMIT = 20
 
 class Table(Read):
-    def __init__(self, api, path, params={}):
+    def __init__(self, api, path, params={}, factual_id=None):
         self.cached_schema = None
+        self.fact_id = factual_id
         Read.__init__(self, api, path, params)
+
+    def factual_id(self, factual_id):
+        return self._copy({}, factual_id)
 
     def search(self, terms):
         return self._copy({'q': terms})
@@ -51,5 +56,12 @@ class Table(Read):
             self.cached_schema = self.api.schema(self)
         return self.cached_schema
 
-    def _copy(self, params):
-        return Table(self.api, self.path, self.merge_params(params))
+    @Base.path.getter
+    def path(self):
+        path = self._path
+        if self.fact_id:
+            path += '/' + self.fact_id
+        return path
+
+    def _copy(self, params, factual_id=None):
+        return Table(self.api, self._path, self.merge_params(params), factual_id or self.fact_id)

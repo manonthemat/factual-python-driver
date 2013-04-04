@@ -219,5 +219,9 @@ class FactualAPITestSuite(unittest.TestCase):
         response = self.factual.multi({'query1':q1,'query2':q2})
         self.assertTrue('query1' in response and 'query2' in response)
 
+    def test_get_row(self):
+        row = self.factual.get_row('places', '03c26917-5d66-4de9-96bc-b13066173c65')
+        self.assertEqual('Factual', row['name'])
+
 if __name__ == '__main__':
     unittest.main()
