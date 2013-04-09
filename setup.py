@@ -5,7 +5,7 @@ required = ['requests == 1.1', 'requests_oauthlib == 0.3.0']
 setup(
     author='Factual Driver Team',
     name='factual-api',
-    version='1.4.0',
+    version='1.4.1',
     description='Official Python driver for the Factual public API',
     long_description=open('README.md').read(),
     url='http://github.com/Factual/factual-python-driver',

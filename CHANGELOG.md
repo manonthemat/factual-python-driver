@@ -1,8 +1,10 @@
-## unreleased
+## 1.4.1
+
  * added ability to set table for match and resolve (#8)
  * added get_row to easily fetch a single row from a table
 
 ## 1.4.0
+
  * upgraded requests
  * replaced rauth with requests-oauthlib
  * added user parameter to reads
