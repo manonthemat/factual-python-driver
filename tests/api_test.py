@@ -148,12 +148,18 @@ class FactualAPITestSuite(unittest.TestCase):
     def test_geopulse(self):
         geopulse = self.factual.geopulse(point(34.06021, -118.41828))
         income_only = geopulse.select('income')
-        all_results = geopulse.data()[0]
-        income_results = income_only.data()[0]
-        self.assertIn('commercial_density', all_results)
-        self.assertTrue(0 <= all_results['commercial_density'] <= 1)
-        self.assertEqual(1, len(income_results))
-        self.assertIn('income', income_results)
+        all_results = geopulse.data()
+        income_results = income_only.data()
+        self.assertIn('demographics', all_results)
+        demographics = all_results['demographics']
+        self.assertIn('area_statistics', demographics)
+        area_statistics = demographics['area_statistics']
+        self.assertIn('commercial_residential', area_statistics)
+        commercial_residential = area_statistics['commercial_residential']
+        self.assertTrue(0 <= commercial_residential['business'] <= 100)
+        income_demographics = income_results['demographics']
+        self.assertEqual(1, len(income_demographics))
+        self.assertIn('income', income_demographics)
 
     def test_geocode(self):
         geocode = self.factual.geocode(point(34.06021, -118.41828))
