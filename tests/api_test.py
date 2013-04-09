@@ -104,6 +104,12 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertEqual('US', row['country'].upper())
         self.assertRegexpMatches(row['website'], 'http')
 
+    def test_includes(self):
+        q = self.places.filters({'category_ids':{'$includes':10}})
+        rows = q.data()
+        for row in rows:
+            self.assertIn(10, row['category_ids'])
+
     def test_raw_read(self):
         # filters here is url encoded {"name":"Starbucks"}
         response = self.factual.raw_read('t/places/read', 'limit=15&filters=%7B%22name%22%3A%22Starbucks%22%7D')

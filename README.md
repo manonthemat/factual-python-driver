@@ -317,6 +317,16 @@ factual.table("places").filters({"name":{"$bw":"starbucks"}}).data()
     <td><tt>query = query.filters({"name":{"$nbwin":["starbucks", "coffee", "tea"]}})</tt></td>
   </tr>
   <tr>
+    <td>$includes</td>
+    <td>array includes</td>
+    <td><tt>query = query.filters({"category_ids":{"$includes":10}})</tt></td>
+  </tr>
+  <tr>
+    <td>$includes_any</td>
+    <td>array includes any of</td>
+    <td><tt>query = query.filters({"category_ids":{"$includes_any":[10,100]}})</tt></td>
+  </tr>
+  <tr>
     <td>$blank</td>
     <td>test to see if a value is (or is not) blank or null</td>
     <td><tt>query = query.filters({"tel":{"$blank":true}})</tt><br>
