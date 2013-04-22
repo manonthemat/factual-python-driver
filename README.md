@@ -68,11 +68,8 @@ select_name = q.select("name")
 ```
 
 ## Tables
-The Factual API is a generic API that sits over all tables available via the Factual v3 API. Some popular ones:
 
-*   Table <tt>global</tt> for international places
-*   Table <tt>places</tt> for US places only
-*   Table <tt>products-cpg</tt> for consumer products
+The Factual API is a generic API that sits over all tables available via the Factual v3 API, such as `places` and `restaurants`.
 
 ## Unit Tests
 Unit Tests are provided to ensure the driver and OAuth are functioning as expected.  
