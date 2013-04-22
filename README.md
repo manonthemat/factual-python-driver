@@ -71,7 +71,6 @@ select_name = q.select("name")
 The Factual API is a generic API that sits over all tables available via the Factual v3 API. Some popular ones:
 
 *   Table <tt>global</tt> for international places
-*   Table <tt>restaurants-us</tt> for US restaurants only
 *   Table <tt>places</tt> for US places only
 *   Table <tt>products-cpg</tt> for consumer products
 
@@ -107,8 +106,8 @@ factual.table("global").select("name,website").filters(
 ```
 
 ```python
-# Return highly rated U.S. restaurants in Los Angeles with WiFi
-factual.table("restaurants-us").filters(
+# Return highly rated restaurants in Los Angeles with WiFi
+factual.table("restaurants").filters(
   {"$and":[{"locality":"los angeles"},{"rating":{"$gte":4}},{"wifi":"true"}]}).data()
 ```
 
