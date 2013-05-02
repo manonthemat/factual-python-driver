@@ -1,4 +1,4 @@
-## unreleased
+## 1.4.2
 
  * updated geopulse endpoint (#10)
 
