@@ -55,7 +55,7 @@ class Factual(object):
         return Flag(self.api, table, factual_id)
 
     def geopulse(self, point={}):
-        return Geopulse(self.api, 'places/geopulse', {'geo': point})
+        return Geopulse(self.api, 'geopulse/context', {'geo': point})
 
     def geocode(self, point):
         return Geocode(self.api, 'places/geocode', {'geo': point})

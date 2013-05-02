@@ -1,3 +1,7 @@
+## unreleased
+
+ * updated geopulse endpoint (#10)
+
 ## 1.4.1
 
  * added ability to set table for match and resolve (#8)
