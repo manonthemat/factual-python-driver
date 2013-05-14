@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from factual import *
+from factual import Factual
 
 KEY = "YOUR_KEY"
 SECRET = "YOUR_SECRET"
