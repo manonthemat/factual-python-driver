@@ -14,7 +14,7 @@ def main():
     print q1.data()[1]
     print q1.get_url()
     
-    q2 = table.filters({'category': "Food & Beverage", 'region': "CA"}).limit(1)
+    q2 = table.filters({'category_ids':{'$includes':338}, 'region': "CA"}).limit(1)
     print q2.data()
   
 if __name__ == '__main__':

@@ -93,7 +93,7 @@ factual.table("places").search("sushi santa monica").data()
 
 ```python
 # Filter based on category"
-factual.table("places").filters({"category":"Food & Beverage > Restaurants > Italian"}).data()
+factual.table("places").filters({"category_ids":{"$includes":358}}).data()
 ```
 
 ```python

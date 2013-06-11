@@ -89,9 +89,9 @@ class FactualAPITestSuite(unittest.TestCase):
             self.assertEqual(u'大阪市', r['locality'])
 
     def test_bw_encoding(self):
-        q = self.places.filters({'category': {"$bw":"Arts, Entertainment & Nightlife > Bars"}})
+        q = self.places.filters({'name': {"$bw":"Star"}})
         row = q.data()[0]
-        self.assertRegexpMatches(row['category'], "Arts, Entertainment & Nightlife > Bars")
+        self.assertRegexpMatches(row['name'], "Star")
 
     def test_in(self):
         q = self.places.filters({"locality":{"$in":["Santa Monica","Los Angeles","Culver City"]}})
@@ -227,7 +227,7 @@ class FactualAPITestSuite(unittest.TestCase):
 
     def test_multi(self):
         q1 = self.factual.table('places').filters({'postcode':'90067'})
-        q2 = self.factual.facets('places').filters({'postcode':'90067'}).select('category')
+        q2 = self.factual.facets('places').filters({'postcode':'90067'}).select('category_labels')
         response = self.factual.multi({'query1':q1,'query2':q2})
         self.assertTrue('query1' in response and 'query2' in response)
 
