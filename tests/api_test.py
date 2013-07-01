@@ -65,7 +65,7 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertEqual(20, included_rows)
 
     def test_resolve(self):
-        q = self.factual.resolve('places-v3', {'name': 'factual inc', 'locality': 'los angeles'})
+        q = self.factual.resolve('places-us', {"name": "factual inc", "locality": "los angeles","postcode":"90067"})
         row = q.data()[0]
         self.assertTrue(row['resolved'])
         self.assertEqual('1801 Avenue Of The Stars', row['address'])
@@ -221,7 +221,7 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertItemsEqual(batch, streamed)
 
     def test_match(self):
-        match = self.factual.match('places-v3', {'name':'McDonalds','address':'10451 Santa Monica Blvd','locality':'Los Angeles','region':'CA'})
+        match = self.factual.match('places-us', {'name':'McDonalds','address':'10451 Santa Monica Blvd','locality':'Los Angeles','region':'CA'})
         match_id = match.get_id()
         self.assertEqual('c730d193-ba4d-4e98-8620-29c672f2f117', match_id)
 
