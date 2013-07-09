@@ -211,11 +211,11 @@ class FactualAPITestSuite(unittest.TestCase):
         self.assertEqual('ok', response['status'])
 
     def test_diffs(self):
-        diffs = self.factual.diffs('2EH4Pz', 1339123455775, 1339136968687).data()
+        diffs = self.factual.diffs('places-us', 1372694400000, 1372695300000).data()
         self.assertGreater(len(diffs), 0)
 
     def test_diffs_streaming(self):
-        diff_request = self.factual.diffs('2EH4Pz', 1339123455775, 1339136968687)
+        diff_request = self.factual.diffs('places-us', 1372694400000, 1372695300000)
         batch = diff_request.data()
         streamed = list(diff_request.stream())
         self.assertItemsEqual(batch, streamed)
