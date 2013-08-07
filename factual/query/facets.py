@@ -2,7 +2,7 @@
 Factual facets api query
 """
 
-from read import Read
+from factual.query.read import Read
 
 class Facets(Read):
     def __init__(self, api, path, params={}):

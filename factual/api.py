@@ -4,12 +4,20 @@ Factual API driver
 
 import json
 from functools import partial
-from urllib import urlencode
 
 import requests
-from requests_oauthlib import OAuth1
+try: # python 2
+    from urllib import urlencode
+    
+except ImportError: # python 3
+    from urllib.parse import urlencode
+    
+try:
+    from requests_oauthlib import OAuth1
+except ImportError:
+    from requests_oauthlib import oauth1 as OAuth1
 
-from query import Resolve, Table, Submit, Insert, Facets, Flag, Geopulse, Geocode, Diffs, Match, Multi, Clear
+from factual.query import Resolve, Table, Submit, Insert, Facets, Flag, Geopulse, Geocode, Diffs, Match, Multi, Clear
 
 API_V3_HOST = "http://api.v3.factual.com"
 DRIVER_VERSION_TAG = "factual-python-driver-1.4.2"

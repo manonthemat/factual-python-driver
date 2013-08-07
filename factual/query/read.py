@@ -1,4 +1,4 @@
-from base import Base
+from factual.query.base import Base
 
 class Read(Base):
     def __init__(self, api, path, params):

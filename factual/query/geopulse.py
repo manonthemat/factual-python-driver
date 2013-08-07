@@ -2,7 +2,7 @@
 Geopulse query
 """
 
-from read import Read
+from factual.query.read import Read
 
 class Geopulse(Read):
     def __init__(self, api, path, point):

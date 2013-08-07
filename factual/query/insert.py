@@ -1,4 +1,4 @@
-from write import Write
+from factual.query.write import Write
 
 class Insert(Write):
     def __init__(self, api, table, factual_id, params={}):
@@ -7,7 +7,7 @@ class Insert(Write):
     def values(self, values):
         return self._copy({'values': values})
 
-    def clear_blanks():
+    def clear_blanks(self):
         return self._copy({'clear_blanks': True})
 
     def _path(self):

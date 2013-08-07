@@ -1,4 +1,4 @@
-from write import Write
+from factual.query.write import Write
 
 class Flag(Write):
     def __init__(self, api, table, factual_id, params={}):
